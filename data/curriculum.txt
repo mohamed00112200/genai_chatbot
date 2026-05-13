@@ -1,0 +1,23 @@
+Machine Learning Engineer Curriculum
+
+Python + ML Fundamentals:
+Python syntax, OOP, NumPy, Pandas, Matplotlib, Scikit-learn.
+Supervised and unsupervised learning, regression, classification, clustering.
+
+Deep Learning + PyTorch:
+Neural networks, backpropagation, CNNs, RNNs, PyTorch tensors, training loops.
+
+Hugging Face + Transformers:
+Transformers architecture, attention mechanism, BERT, GPT, tokenizers, fine-tuning.
+
+RAG + LangChain + Vector DB:
+Embeddings, vector databases, FAISS, Pinecone, LangChain chains, retrieval-augmented generation.
+
+FastAPI + Deployment + Docker:
+REST APIs, FastAPI, Docker containers, model serving.
+
+Azure ML + MLOps:
+Azure ML workspace, pipelines, MLflow, CI/CD, monitoring, model versioning.
+
+Agentic AI:
+LangChain agents, LangGraph, Semantic Kernel, tool calling, autonomous workflows.

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chat (Gemma3)</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-box {
+            width: 420px;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .msg {
+            padding: 8px 12px;
+            margin: 6px 0;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user { background: #007bff; color: white; align-self: flex-end; }
+        .bot { background: #e9ecef; align-self: flex-start; }
+        input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: calc(100% - 22px);
+        }
+        button {
+            margin-top: 6px;
+            padding: 10px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-box">
+    <div class="messages" id="messages"></div>
+    <input id="input" placeholder="Ask something..." />
+    <button onclick="send()">Send</button>
+</div>
+
+<script>
+async function send() {
+    const input = document.getElementById("input");
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    try {
+        const res = await fetch("/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: text })
+        });
+
+        const data = await res.json();
+        addMessage(data.answer, "bot");
+    } catch (err) {
+        addMessage("Error connecting to server.", "bot");
+    }
+}
+
+function addMessage(text, type) {
+    const msg = document.createElement("div");
+    msg.className = "msg " + type;
+    msg.innerText = text;
+    const messages = document.getElementById("messages");
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+}
+</script>
+
+</body>
+</html>
